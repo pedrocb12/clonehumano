@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Laboratório de Clonagem</title>
+
+<style>
+body{
+    background:#0a0a0a;
+    color:#00ff9f;
+    font-family:Arial;
+    text-align:center;
+}
+
+.container{
+    margin-top:50px;
+}
+
+input,button{
+    padding:10px;
+    margin:10px;
+    border:none;
+}
+
+button{
+    background:#00ff9f;
+    cursor:pointer;
+}
+
+.progress{
+    width:300px;
+    height:20px;
+    border:1px solid #00ff9f;
+    margin:auto;
+}
+
+.bar{
+    height:100%;
+    width:0%;
+    background:#00ff9f;
+}
+
+#resultado{
+    margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>CLONADOR HUMANO 3000</h1>
+
+<input type="text" id="nome" placeholder="Nome do original">
+<input type="number" id="peso" placeholder="Peso (kg)">
+<br>
+<button onclick="clonar()">INICIAR CLONAGEM</button>
+
+<div class="progress">
+<div class="bar" id="barra"></div>
+</div>
+
+<div id="resultado"></div>
+</div>
+
+<script>
+
+function clonar(){
+
+let peso = document.getElementById("peso").value;
+let nome = document.getElementById("nome").value;
+
+let barra = document.getElementById("barra");
+let resultado = document.getElementById("resultado");
+
+let progresso = 0;
+
+let intervalo = setInterval(function(){
+
+progresso++;
+
+barra.style.width = progresso + "%";
+
+if(progresso>=100){
+
+clearInterval(intervalo);
+
+let hidrogenio = (peso * 0.10).toFixed(2);
+let carbono = (peso * 0.18).toFixed(2);
+let oxigenio = (peso * 0.65).toFixed(2);
+
+resultado.innerHTML = `
+<h2>Clonagem Concluída</h2>
+<p>Hidrogênio: ${hidrogenio} kg</p>
+<p>Carbono: ${carbono} kg</p>
+<p>Oxigênio: ${oxigenio} kg</p>
+
+<input id="nomeClone" placeholder="Nomeie seu Clone">
+<br>
+<button onclick="finalizar('${nome}')">FINALIZAR</button>
+`;
+
+}
+
+},40)
+
+}
+
+function finalizar(original){
+
+let clone = document.getElementById("nomeClone").value;
+
+document.getElementById("resultado").innerHTML = `
+<h2>CLONE CRIADO</h2>
+<p>Original: ${original}</p>
+<p>Clone: ${clone}</p>
+<p>Status: Estável</p>
+`;
+
+}
+
+</script>
+
+</body>
+</html>
